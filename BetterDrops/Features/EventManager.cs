@@ -1,6 +1,6 @@
 ﻿using MEC;
 using Respawning;
-using BetterDrops.Data;
+using BetterDrops.Features.Data;
 using Exiled.Events.EventArgs;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;

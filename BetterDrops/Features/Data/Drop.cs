@@ -2,7 +2,7 @@
 using BetterDrops.Features.Components;
 using UnityEngine;
 
-namespace BetterDrops.Data
+namespace BetterDrops.Features.Data
 {
     public class Drop
     {

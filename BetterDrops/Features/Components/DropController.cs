@@ -36,7 +36,7 @@ namespace BetterDrops.Features.Components
             _collided = true;
             Destroy(gameObject.GetComponent<Rigidbody>());
             
-            balloon.AddComponent<Balloon>();
+            balloon.AddComponent<BalloonController>();
 
             AddTrigger();
         }

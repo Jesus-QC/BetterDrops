@@ -2,7 +2,7 @@
 using Mirror;
 using UnityEngine;
 
-namespace BetterDrops.Data
+namespace BetterDrops.Features.Data
 {
     public class SimplifiedLight
     {

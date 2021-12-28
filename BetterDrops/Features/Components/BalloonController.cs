@@ -2,7 +2,7 @@
 
 namespace BetterDrops.Features.Components
 {
-    public class Balloon : MonoBehaviour
+    public class BalloonController : MonoBehaviour
     {
         private float _startPos;
 
@@ -13,7 +13,7 @@ namespace BetterDrops.Features.Components
             if (transform.position.y - _startPos < 15)
             {
                 transform.position += Vector3.up * Time.deltaTime * 10;
-                transform.localScale -= Vector3.one * Time.deltaTime * 1.25f;
+                transform.localScale += Vector3.one * Time.deltaTime * 1.25f;
             }
             else
                 Destroy(gameObject);

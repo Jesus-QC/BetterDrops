@@ -101,11 +101,11 @@
     <ItemGroup>
         <Compile Include="BetterDrops.cs" />
         <Compile Include="Commands\SpawnCommand.cs" />
-        <Compile Include="Data\Drop.cs" />
-        <Compile Include="Data\SimplifiedLight.cs" />
-        <Compile Include="Data\SimplifiedToy.cs" />
-        <Compile Include="Features\Components\Balloon.cs" />
+        <Compile Include="Features\Components\BalloonController.cs" />
         <Compile Include="Features\Components\DropController.cs" />
+        <Compile Include="Features\Data\Drop.cs" />
+        <Compile Include="Features\Data\SimplifiedLight.cs" />
+        <Compile Include="Features\Data\SimplifiedToy.cs" />
         <Compile Include="Features\EventManager.cs" />
         <Compile Include="Features\DropExtensions.cs" />
         <Compile Include="PluginConfig.cs" />

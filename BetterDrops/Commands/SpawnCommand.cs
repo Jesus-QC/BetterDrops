@@ -1,14 +1,12 @@
 ﻿using System;
 using CommandSystem;
-using BetterDrops.Data;
+using BetterDrops.Features.Data;
 using BetterDrops.Features;
 using UnityEngine;
 
 namespace BetterDrops.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    [CommandHandler(typeof(GameConsoleCommandHandler))]
-    [CommandHandler(typeof(ClientCommandHandler))]
     public class SpawnCommand : ICommand
     {
         public string Command { get; } = "SpawnDrop";
