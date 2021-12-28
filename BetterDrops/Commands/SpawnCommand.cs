@@ -2,6 +2,7 @@
 using CommandSystem;
 using BetterDrops.Features.Data;
 using BetterDrops.Features;
+using Exiled.Permissions.Extensions;
 using UnityEngine;
 
 namespace BetterDrops.Commands
@@ -21,6 +22,12 @@ namespace BetterDrops.Commands
              * - spawndrop chaos
              */
 
+            if (!sender.CheckPermission("bd.spawndrop"))
+            {
+                response = "You don't have permission to execute this command. Required permission: bd.spawndrop";
+                return false;
+            }
+            
             if (arguments.Count == 1)
             {
                 if (arguments.At(0).ToLower() == "mtf")
