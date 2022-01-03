@@ -12,7 +12,7 @@ namespace BetterDrops
         public override string Author { get; } = "Jesus-QC";
         public override string Name { get; } = "BetterDrops";
         public override string Prefix { get; } = "better_drops";
-        public override Version Version { get; } = new Version(1, 0, 1);
+        public override Version Version { get; } = new Version(1, 0, 2);
         public override Version RequiredExiledVersion { get; } = new Version(4, 1, 7);
 
         public static PluginConfig Cfg;

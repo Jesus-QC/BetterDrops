@@ -11,7 +11,7 @@ namespace BetterDrops.Commands
     public class SpawnCommand : ICommand
     {
         public string Command { get; } = "SpawnDrop";
-        public string[] Aliases { get; } = {};
+        public string[] Aliases { get; } = Array.Empty<string>();
         public string Description { get; } = "Spawns drops";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -34,9 +34,12 @@ namespace BetterDrops.Commands
                     new Drop(Team.MTF.GetRandomDropSpawnPoint()).Spawn();
                 else if (arguments.At(0).ToLower() == "chaos")
                     new Drop(Team.CHI.GetRandomDropSpawnPoint()).Spawn();
+
+                response = "Done!";
+                return true;
             }
             
-            else if(arguments.Count > 2)
+            if(arguments.Count > 2)
             {
                 if (!float.TryParse(arguments.At(0), out var x) || !float.TryParse(arguments.At(1), out var y) || !float.TryParse(arguments.At(2), out var z))
                 {

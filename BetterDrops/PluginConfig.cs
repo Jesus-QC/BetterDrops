@@ -12,7 +12,7 @@ namespace BetterDrops
         public int DropLayer { get; set; } = 6;
         
         [Description("The possible items inside the drop")]
-        public List<ItemType> PossibleItems { get; set; } = new List<ItemType> {ItemType.Coal, ItemType.Coin, ItemType.GunCrossvec, ItemType.GunLogicer, ItemType.GunRevolver, ItemType.GunShotgun, ItemType.GunAK, ItemType.GunCOM15, ItemType.GunE11SR, ItemType.Ammo9x19, ItemType.Ammo12gauge, ItemType.Adrenaline, ItemType.Flashlight, ItemType.Medkit, ItemType.GrenadeFlash, ItemType.GrenadeHE};
+        public List<ItemType> PossibleItems { get; set; } = new List<ItemType> {ItemType.Coin, ItemType.GunCrossvec, ItemType.GunLogicer, ItemType.GunRevolver, ItemType.GunShotgun, ItemType.GunAK, ItemType.GunCOM15, ItemType.GunE11SR, ItemType.Ammo9x19, ItemType.Ammo12gauge, ItemType.Adrenaline, ItemType.Flashlight, ItemType.Medkit, ItemType.GrenadeFlash, ItemType.GrenadeHE};
 
         [Description("Should drops spawn on MTFs spawns")]
         public bool MtfDrops { get; set; } = true;

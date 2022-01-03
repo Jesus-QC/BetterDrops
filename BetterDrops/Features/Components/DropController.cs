@@ -19,6 +19,8 @@ namespace BetterDrops.Features.Components
             ChangeLayers(transform, BetterDrops.Cfg.DropLayer);
             
             _rigidbody = gameObject.AddComponent<Rigidbody>();
+            _rigidbody.mass = 20;
+            _rigidbody.drag = 3;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }
 
@@ -62,10 +64,10 @@ namespace BetterDrops.Features.Components
             foreach (var face in faces)
             {
                 var r = face.AddComponent<Rigidbody>();
-                r.AddExplosionForce(5, transform.position, 1);
+                r.AddExplosionForce(20, transform.position, 1);
             }
 
-            BetterDrops.EventManager.Coroutines.Add(Timing.CallDelayed(30, () => Destroy(gameObject)));
+            BetterDrops.EventManager.Coroutines.Add(Timing.CallDelayed(5, () => Destroy(gameObject)));
         }
         
         private static void ChangeLayers(Transform t, int layer)
