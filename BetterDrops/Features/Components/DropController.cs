@@ -59,7 +59,7 @@ namespace BetterDrops.Features.Components
             _crateOpened = true;
 
             var possibleItems = BetterDrops.Cfg.PossibleItems;
-            new Item(possibleItems[Random.Range(0, possibleItems.Count)]).Spawn(transform.position);
+            Item.Create(possibleItems[Random.Range(0, possibleItems.Count)]).Spawn(transform.position);
             
             foreach (var face in faces)
             {
