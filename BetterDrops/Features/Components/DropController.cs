@@ -1,27 +1,119 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Exiled.API.Features;
 using Exiled.API.Features.Items;
-using UnityEngine;
+using Exiled.API.Features.Toys;
 using MEC;
+using UnityEngine;
+using Light = Exiled.API.Features.Toys.Light;
 
 namespace BetterDrops.Features.Components
 {
-    public class DropController : MonoBehaviour
+    public class DropController: MonoBehaviour
     {
-        private Rigidbody _rigidbody;
-        private bool _collided;
-        private bool _crateOpened;
-        
-        public GameObject balloon;
-        public List<GameObject> faces;
+        private Color _color;
+        private IEnumerable<ItemType> _items;
 
-        private void Start()
+        public void Init(Color mainColor, IEnumerable<ItemType> items)
         {
-            ChangeLayers(transform, BetterDrops.Cfg.DropLayer);
+            _color = mainColor;
+            _items = items;
             
-            _rigidbody = gameObject.AddComponent<Rigidbody>();
-            _rigidbody.mass = 20;
-            _rigidbody.drag = 3;
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+            Transform t = transform;
+            
+            SpawnString(t, new Vector3(.5f,1,.5f), new Vector3(7,0,-7));
+            SpawnString(t, new Vector3(-.5f,1,.5f), new Vector3(7,0,7));
+            SpawnString(t, new Vector3(.5f,1,-.5f), new Vector3(-7,0,-7));
+            SpawnString(t, new Vector3(-.5f,1,-.5f), new Vector3(-7,0,7));
+
+            SpawnFace(t, new Vector3(0.5f, 0, 0), new Vector3(0,0,0));
+            SpawnFace(t, new Vector3(0, 0, 0.5f), new Vector3(0,90,0));
+            SpawnFace(t, new Vector3(-0.5f, 0, 0), new Vector3(0,0,0));
+            SpawnFace(t, new Vector3(0, 0, -0.5f), new Vector3(0,90,0));
+            SpawnFace(t, new Vector3(0, 0.5f, 0), new Vector3(0,0,90));
+            SpawnFace(t, new Vector3(0, -0.5f, 0), new Vector3(0,0,90));
+            
+            SpawnBalloon(t);
+            SpawnLight(t);
+            
+            Rigidbody r = t.gameObject.AddComponent<Rigidbody>();
+            r.drag = 10;
+            r.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+
+            Timing.RunCoroutine(ChangeLayers());
+        }
+
+        private IEnumerator<float> ChangeLayers()
+        {
+            yield return Timing.WaitForOneFrame;
+            ChangeLayers(transform, 6);
+        }
+
+        private void SpawnBalloon(Transform parent)
+        {
+            CreateToy(PrimitiveType.Sphere, parent, new Vector3(0,2,0), Vector3.zero, new Vector3(-2,-2,-2), _color);
+        }
+
+        private void SpawnString(Transform parent, Vector3 position, Vector3 rotation)
+        {
+            CreateToy(PrimitiveType.Cylinder, parent, position, rotation, new Vector3(-.05f,-1,-.05f), Color.white);
+        }
+        
+        private void SpawnFace(Transform parent, Vector3 position, Vector3 rotation)
+        {
+            Transform f = new GameObject("face").transform;
+            f.SetParent(parent);
+            f.localPosition = position;
+            f.localRotation = Quaternion.Euler(rotation);
+            
+            SpawnBigFace(f);
+            SpawnFacePart(f, Vector3.zero);
+            SpawnFacePart(f, new Vector3(0,0,-0.3f));
+            SpawnFacePart(f, new Vector3(0,0,0.3f));
+        }
+
+        private void SpawnBigFace(Transform parent)
+        {
+            CreateToy(PrimitiveType.Cube, parent, Vector3.zero, Vector3.zero, new Vector3(-.1f, -1, -1), _color);
+        }
+        
+        private void SpawnFacePart(Transform parent, Vector3 localPosition)
+        {
+            CreateToy(PrimitiveType.Cube, parent, localPosition, Vector3.zero, new Vector3(-.2f, 1.2f, -.2f), Color.black);
+        }
+
+        private void SpawnLight(Transform parent)
+        {
+            Light l = Light.Create(null, null, null, false);
+            l.Color = _color;
+            l.MovementSmoothing = 60;
+            l.Intensity = 2;
+            Transform t = l.Base.transform;
+            t.SetParent(parent);
+            t.localPosition = Vector3.up;
+            l.Spawn();
+        }
+        
+        private static void CreateToy(PrimitiveType type, Transform parent, Vector3 pos, Vector3 rot, Vector3 scale, Color color)
+        {
+            Primitive p = Primitive.Create(type, null, null, scale, false);
+            Transform t = p.Base.transform;
+            t.SetParent(parent);
+            t.localPosition = pos;
+            t.localRotation = Quaternion.Euler(rot);
+            p.Color = color;
+            p.MovementSmoothing = 60;
+            p.Spawn();
+        }
+
+        private static void ChangeLayers(Transform t, int layer)
+        {
+            Log.Info(t.name + ' ' + layer);
+            t.gameObject.layer = layer;
+            foreach (Transform child in t)
+            {
+                ChangeLayers(child, layer);
+            }
         }
 
         private void Update()
@@ -30,53 +122,57 @@ namespace BetterDrops.Features.Components
                 transform.localEulerAngles += Vector3.up * Time.deltaTime * 30;
         }
 
-        private void OnCollisionEnter(Collision _)
+        private bool _collided;
+        
+        private void OnCollisionEnter()
         {
-            if(_collided) // The box has 4 simultaneous collisions
+            if (_collided)
                 return;
-            
-            _collided = true;
-            Destroy(gameObject.GetComponent<Rigidbody>());
-            
-            balloon.AddComponent<BalloonController>();
 
+            _collided = true;
+            
+            DeployBalloon();
             AddTrigger();
+        }
+
+        private void DeployBalloon()
+        {
+            Destroy(transform.GetChild(0).gameObject);
+            Destroy(transform.GetChild(1).gameObject);
+            Destroy(transform.GetChild(2).gameObject);
+            Destroy(transform.GetChild(3).gameObject);
+            transform.GetChild(10).gameObject.AddComponent<BalloonController>();
         }
 
         private void AddTrigger()
         {
-            var collider = gameObject.AddComponent<BoxCollider>();
-            collider.isTrigger = true;
-            collider.size = Vector3.one * 7.5f;
-            collider.center = Vector3.up;
+            BoxCollider c = gameObject.AddComponent<BoxCollider>();
+            c.isTrigger = true;
+            c.size = Vector3.one * 7.5f;
+            c.center = Vector3.up;
         }
-        
+
+        private bool _triggered;
+
         private void OnTriggerEnter(Collider other)
         {
-            if(!_collided || _crateOpened || other.gameObject.name != "Player")
+            if (_triggered || !_collided || other.gameObject.name != "Player")
                 return;
 
-            _crateOpened = true;
+            _triggered = true;
 
-            var possibleItems = BetterDrops.Cfg.PossibleItems;
-            Item.Create(possibleItems[Random.Range(0, possibleItems.Count)]).Spawn(transform.position);
+            Transform t = transform;
             
-            foreach (var face in faces)
+            for (int i = 0; i < t.childCount - 2; i++)
             {
-                var r = face.AddComponent<Rigidbody>();
-                r.AddExplosionForce(20, transform.position, 1);
+                t.GetChild(i).gameObject.AddComponent<DisappearController>().startPos = t.position;
             }
 
-            BetterDrops.EventManager.Coroutines.Add(Timing.CallDelayed(5, () => Destroy(gameObject)));
-        }
-        
-        private static void ChangeLayers(Transform t, int layer)
-        {
-            t.gameObject.layer = layer;
-            foreach (Transform child in t)
-            {
-                ChangeLayers(child, layer);
-            }
+            foreach (ItemType item in _items)
+                Item.Create(item).Spawn(t.position);
+
+            Destroy(GetComponent<Rigidbody>());
+            Destroy(gameObject, 5);
         }
     }
 }

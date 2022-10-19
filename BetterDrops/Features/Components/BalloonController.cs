@@ -4,18 +4,15 @@ namespace BetterDrops.Features.Components
 {
     public class BalloonController : MonoBehaviour
     {
-        private float _startPos;
-
-        private void Start() => _startPos = transform.position.y;
+        private float _counter;
 
         private void Update()
         {
-            if (transform.position.y - _startPos < 15)
-            {
-                transform.position += Vector3.up * Time.deltaTime * 10;
-                transform.localScale += Vector3.one * Time.deltaTime * 1.25f;
-            }
-            else
+            transform.position += 5 * Time.deltaTime * Vector3.up;
+            
+            _counter += Time.deltaTime;
+
+            if (_counter > 10)
                 Destroy(gameObject);
         }
     }

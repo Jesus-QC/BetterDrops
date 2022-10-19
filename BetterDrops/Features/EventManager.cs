@@ -1,50 +1,57 @@
 ﻿using MEC;
 using Respawning;
-using BetterDrops.Features.Data;
 using Exiled.Events.EventArgs;
 using System.Collections.Generic;
+using BetterDrops.Configs;
+using BetterDrops.Features.Extensions;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace BetterDrops.Features
 {
     public class EventManager
     {
-        public List<CoroutineHandle> Coroutines = new List<CoroutineHandle>();
+        private readonly PluginConfig _config;
+        public EventManager(BetterDrops plugin) => _config = plugin.Config;
 
+        private readonly HashSet<CoroutineHandle> _coroutines = new HashSet<CoroutineHandle>();
+        
         public void OnRestartingRound()
         {
-            foreach (var coroutine in Coroutines)
+            foreach (CoroutineHandle coroutine in _coroutines)
                 Timing.KillCoroutines(coroutine);
-            Coroutines.Clear();
+            
+            _coroutines.Clear();
         }
 
         public void OnStartingRound()
         {
-            if(BetterDrops.Cfg.RandomDrops)
-                Coroutines.Add(Timing.RunCoroutine(RandomDropCoroutine(BetterDrops.Cfg.FirstRandomDropOffset)));
+            if (_config.RandomDrops.WaveSettings.IsEnabled && _coroutines.Count == 0)
+                _coroutines.Add(Timing.RunCoroutine(RandomDropCoroutine(_config.RandomDrops)));
         }
 
         public void OnRespawningTeam(RespawningTeamEventArgs ev)
         {
-            var team = ev.NextKnownTeam == SpawnableTeamType.NineTailedFox ? Team.MTF : Team.CHI;
+            Team team = ev.NextKnownTeam == SpawnableTeamType.NineTailedFox ? Team.MTF : Team.CHI;
             
-            if(team == Team.MTF && !BetterDrops.Cfg.MtfDrops || team == Team.CHI && !BetterDrops.Cfg.ChaosDrops)
+            if(team == Team.MTF && !_config.MtfDropWave.IsEnabled || team == Team.CHI && !_config.ChaosDropWave.IsEnabled)
                 return;
-                
-            for (var i = 0; i < BetterDrops.Cfg.NumberOfDrops[team]; i++)
-                new Drop(team.GetRandomDropSpawnPoint()).Spawn();
+            
+            DropConfig cfg = team == Team.MTF ? _config.MtfDropWave : _config.ChaosDropWave;
+            team.SpawnDrops(cfg, cfg.NumberOfDrops);
         }
 
-        private IEnumerator<float> RandomDropCoroutine(float offset)
+        private static IEnumerator<float> RandomDropCoroutine(RandomDropConfigs configs)
         {
-            yield return Timing.WaitForSeconds(offset);
+            yield return Timing.WaitForSeconds(configs.FirstRandomDropOffset);
 
-            var team = Random.Range(0, 2) == 1 ? Team.MTF : Team.CHI;
+            for (;;)
+            {
+                Team team = Random.Range(0, 2) == 1 ? Team.MTF : Team.CHI;
             
-            for (var i = 0; i < BetterDrops.Cfg.NumberOfDrops[Team.TUT]; i++)
-                new Drop(team.GetRandomDropSpawnPoint()).Spawn();
-            
-            Coroutines.Add(Timing.RunCoroutine(RandomDropCoroutine(Random.Range(BetterDrops.Cfg.MinRandomDropsInterval, BetterDrops.Cfg.MaxRandomDropsInterval))));
+                team.SpawnDrops(configs.WaveSettings, configs.WaveSettings.NumberOfDrops);
+                yield return Timing.WaitForSeconds(Random.Range(configs.MinRandomDropsInterval, configs.MaxRandomDropsInterval));
+            }
         }
     }
 }

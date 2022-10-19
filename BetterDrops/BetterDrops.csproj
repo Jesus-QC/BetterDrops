@@ -33,81 +33,76 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Assembly-CSharp-Publicized.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
-        <Reference Include="CommandSystem.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\CommandSystem.Core.dll</HintPath>
+        <Reference Include="CommandSystem.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\CommandSystem.Core.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.API, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.API.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.API, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.API.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Bootstrap, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.Bootstrap.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.Bootstrap, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.Bootstrap.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.CreditTags, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.CreditTags.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.CreditTags, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.CreditTags.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.CustomItems, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.CustomItems.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.CustomItems, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.CustomItems.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.CustomRoles, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.CustomRoles.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.CustomRoles, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.CustomRoles.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Events, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.Events.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.Events, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.Events.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Loader, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.Loader.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.Loader, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.Loader.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Permissions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.Permissions.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.Permissions, Version=5.3.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.Permissions.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Updater, Version=3.1.1.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\EXILED.5.0.0-alpha.4\lib\net472\Exiled.Updater.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="Exiled.Updater, Version=3.1.1.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\Exiled.Updater.dll</HintPath>
         </Reference>
         <Reference Include="Facepunch.Steamworks.Win64, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\Facepunch.Steamworks.Win64.dll</HintPath>
         </Reference>
         <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="NorthwoodLib, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\EXILED.5.3.1\lib\net472\NorthwoodLib.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
         <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\UnityEngine.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+          <HintPath>$(EXILED_REFERENCES)\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BetterDrops.cs" />
+        <Compile Include="Commands\BetterDropsCommand.cs" />
         <Compile Include="Commands\SpawnCommand.cs" />
+        <Compile Include="Configs\DropConfig.cs" />
+        <Compile Include="Configs\RandomDropConfigs.cs" />
         <Compile Include="Features\Components\BalloonController.cs" />
+        <Compile Include="Features\Components\DisappearController.cs" />
         <Compile Include="Features\Components\DropController.cs" />
-        <Compile Include="Features\Data\Drop.cs" />
-        <Compile Include="Features\Data\SimplifiedLight.cs" />
-        <Compile Include="Features\Data\SimplifiedToy.cs" />
         <Compile Include="Features\EventManager.cs" />
-        <Compile Include="Features\DropExtensions.cs" />
+        <Compile Include="Features\Extensions\DropExtensions.cs" />
         <Compile Include="PluginConfig.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
