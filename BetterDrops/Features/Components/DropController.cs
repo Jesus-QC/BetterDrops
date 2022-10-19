@@ -108,7 +108,6 @@ namespace BetterDrops.Features.Components
 
         private static void ChangeLayers(Transform t, int layer)
         {
-            Log.Info(t.name + ' ' + layer);
             t.gameObject.layer = layer;
             foreach (Transform child in t)
             {
