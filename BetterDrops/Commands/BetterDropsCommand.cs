@@ -15,7 +15,7 @@ namespace BetterDrops.Commands
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            response = "Please, specify a valid subcommand! Available ones: spawn";
+            response = "Please, specify a valid subcommand! Available ones: spawn, mtf, chaos";
             return false;
         }
 
