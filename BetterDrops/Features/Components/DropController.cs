@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Exiled.API.Features;
+﻿using System.Collections.Generic;
 using Exiled.API.Features.Items;
 using Exiled.API.Features.Toys;
 using MEC;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using BetterDrops.Configs;
 using BetterDrops.Features.Components;
-using Exiled.API.Features;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

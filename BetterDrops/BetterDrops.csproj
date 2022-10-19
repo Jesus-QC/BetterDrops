@@ -95,6 +95,8 @@
     <ItemGroup>
         <Compile Include="BetterDrops.cs" />
         <Compile Include="Commands\BetterDropsCommand.cs" />
+        <Compile Include="Commands\ChaosCommand.cs" />
+        <Compile Include="Commands\MtfCommand.cs" />
         <Compile Include="Commands\SpawnCommand.cs" />
         <Compile Include="Configs\DropConfig.cs" />
         <Compile Include="Configs\RandomDropConfigs.cs" />
