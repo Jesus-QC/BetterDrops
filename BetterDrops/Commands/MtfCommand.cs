@@ -1,10 +1,10 @@
 ﻿using System;
 using BetterDrops.Features.Extensions;
 using CommandSystem;
+using Exiled.Permissions.Extensions;
 
 namespace BetterDrops.Commands
 {
-    [CommandHandler(typeof(ClientCommandHandler))]
     public class MtfCommand : ICommand
     {
         public static MtfCommand Instance { get; } = new MtfCommand();
@@ -15,6 +15,12 @@ namespace BetterDrops.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            if (!sender.CheckPermission("bd.spawn"))
+            {
+                response = "You don't have perms to do that!";
+                return false;
+            }
+            
             Team.MTF.SpawnDrops(BetterDrops.PluginConfig.MtfDropWave, BetterDrops.PluginConfig.MtfDropWave.NumberOfDrops);
 
             response = "Spawned!";

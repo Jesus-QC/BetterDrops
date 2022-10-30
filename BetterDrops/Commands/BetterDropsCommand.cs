@@ -11,6 +11,8 @@ namespace BetterDrops.Commands
         public sealed override void LoadGeneratedCommands()
         { 
             RegisterCommand(SpawnCommand.Instance);
+            RegisterCommand(ChaosCommand.Instance);
+            RegisterCommand(MtfCommand.Instance);
         }
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)

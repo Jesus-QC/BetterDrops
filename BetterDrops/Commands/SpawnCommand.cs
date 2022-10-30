@@ -2,12 +2,12 @@
 using BetterDrops.Features.Extensions;
 using CommandSystem;
 using Exiled.API.Features;
+using Exiled.Permissions.Extensions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace BetterDrops.Commands
 {
-    [CommandHandler(typeof(ClientCommandHandler))]
     public class SpawnCommand : ICommand
     {
         public static SpawnCommand Instance { get; } = new SpawnCommand();
@@ -18,6 +18,12 @@ namespace BetterDrops.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            if (!sender.CheckPermission("bd.spawn"))
+            {
+                response = "You don't have perms to do that!";
+                return false;
+            }
+            
             DropExtensions.SpawnDrop(Player.Get(sender).Position + Vector3.up * 10f, Random.ColorHSV(), new [] { ItemType.Coin });
 
             response = "Spawned!";
