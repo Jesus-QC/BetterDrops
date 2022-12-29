@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BetterDrops.Configs;
 using BetterDrops.Features.Components;
+using PlayerRoles;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ namespace BetterDrops.Features.Extensions
 
         private static void SpawnDrop(this Team team, DropConfig config)
         {
-            Vector3 spawnPosition = team == Team.TUT ? (Random.Range(0, 2) == 1 ? Team.MTF : Team.CHI).GetRandomSpawnPosition() : team.GetRandomSpawnPosition();
+            Vector3 spawnPosition = team == Team.OtherAlive ? (Random.Range(0, 2) == 1 ? Team.FoundationForces : Team.ChaosInsurgency).GetRandomSpawnPosition() : team.GetRandomSpawnPosition();
             SpawnDrop(spawnPosition, ParseColor(config.Color), GetRandomItem(config.PossibleItems, config.ItemsPerDrop));
         }
 
@@ -32,9 +33,9 @@ namespace BetterDrops.Features.Extensions
         {
             switch (team)
             {
-                case Team.CHI:
+                case Team.ChaosInsurgency:
                     return new Vector3(Random.Range(46.5f, -20), 1000 + Random.Range(25f, 73f), Random.Range(-51, -64.5f));
-                case Team.MTF:
+                case Team.FoundationForces:
                     return new Vector3(Random.Range(151.5f, 192), 1000 + Random.Range(25f, 73f), Random.Range(-70, -47.5f));
                 default:
                     throw new IndexOutOfRangeException("Index out of range. Only MTF and CHI can get a random spawn position.");

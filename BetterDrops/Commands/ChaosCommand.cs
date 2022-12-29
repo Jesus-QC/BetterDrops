@@ -2,6 +2,7 @@
 using BetterDrops.Features.Extensions;
 using CommandSystem;
 using Exiled.Permissions.Extensions;
+using PlayerRoles;
 
 namespace BetterDrops.Commands
 {
@@ -21,7 +22,7 @@ namespace BetterDrops.Commands
                 return false;
             }
             
-            Team.CHI.SpawnDrops(BetterDrops.PluginConfig.ChaosDropWave, BetterDrops.PluginConfig.ChaosDropWave.NumberOfDrops);
+            Team.ChaosInsurgency.SpawnDrops(BetterDrops.PluginConfig.ChaosDropWave, BetterDrops.PluginConfig.ChaosDropWave.NumberOfDrops);
 
             response = "Spawned!";
             return true;

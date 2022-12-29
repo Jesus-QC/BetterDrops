@@ -4,6 +4,8 @@ using Exiled.Events.EventArgs;
 using System.Collections.Generic;
 using BetterDrops.Configs;
 using BetterDrops.Features.Extensions;
+using Exiled.Events.EventArgs.Server;
+using PlayerRoles;
 using Random = UnityEngine.Random;
 
 namespace BetterDrops.Features
@@ -28,12 +30,12 @@ namespace BetterDrops.Features
 
         public void OnRespawningTeam(RespawningTeamEventArgs ev)
         {
-            Team team = ev.NextKnownTeam == SpawnableTeamType.NineTailedFox ? Team.MTF : Team.CHI;
+            Team team = ev.NextKnownTeam == SpawnableTeamType.NineTailedFox ? Team.FoundationForces : Team.ChaosInsurgency;
             
-            if(team == Team.MTF && !BetterDrops.PluginConfig.MtfDropWave.IsEnabled || team == Team.CHI && !BetterDrops.PluginConfig.ChaosDropWave.IsEnabled)
+            if(team == Team.FoundationForces && !BetterDrops.PluginConfig.MtfDropWave.IsEnabled || team == Team.ChaosInsurgency && !BetterDrops.PluginConfig.ChaosDropWave.IsEnabled)
                 return;
             
-            DropConfig cfg = team == Team.MTF ? BetterDrops.PluginConfig.MtfDropWave : BetterDrops.PluginConfig.ChaosDropWave;
+            DropConfig cfg = team == Team.FoundationForces ? BetterDrops.PluginConfig.MtfDropWave : BetterDrops.PluginConfig.ChaosDropWave;
             team.SpawnDrops(cfg, cfg.NumberOfDrops);
         }
 
@@ -43,7 +45,7 @@ namespace BetterDrops.Features
 
             for (;;)
             {
-                Team team = Random.Range(0, 2) == 1 ? Team.MTF : Team.CHI;
+                Team team = Random.Range(0, 2) == 1 ? Team.FoundationForces : Team.ChaosInsurgency;
             
                 team.SpawnDrops(configs.WaveSettings, configs.WaveSettings.NumberOfDrops);
                 yield return Timing.WaitForSeconds(Random.Range(configs.MinRandomDropsInterval, configs.MaxRandomDropsInterval));

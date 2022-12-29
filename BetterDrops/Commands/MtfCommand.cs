@@ -2,6 +2,7 @@
 using BetterDrops.Features.Extensions;
 using CommandSystem;
 using Exiled.Permissions.Extensions;
+using PlayerRoles;
 
 namespace BetterDrops.Commands
 {
@@ -21,7 +22,7 @@ namespace BetterDrops.Commands
                 return false;
             }
             
-            Team.MTF.SpawnDrops(BetterDrops.PluginConfig.MtfDropWave, BetterDrops.PluginConfig.MtfDropWave.NumberOfDrops);
+            Team.FoundationForces.SpawnDrops(BetterDrops.PluginConfig.MtfDropWave, BetterDrops.PluginConfig.MtfDropWave.NumberOfDrops);
 
             response = "Spawned!";
             return true;

@@ -7,6 +7,7 @@ namespace BetterDrops
     public class PluginConfig : IConfig
     {
         public bool IsEnabled { get; set; } = true;
+        public bool Debug { get; set; } = false;
 
         [Description("The configs of the MTF drop waves.")]
         public DropConfig MtfDropWave { get; set; } = new DropConfig();
